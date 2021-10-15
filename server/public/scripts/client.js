@@ -12,7 +12,7 @@ $(document).ready(function () {
 
 
 function clickListeners() {
-    // $('#submitButton').on(`click`, submitTask);
+    $('#submitButton').on(`click`, submitTask);
     // $('.deleteButton').on(`click`, xxx, deleteTask);
     //$('.doneButton').on(`click`, xxx, doneTask);
 }
@@ -39,8 +39,24 @@ function getTasks() {
 // }
 
 
-// function submitTask() {
-//     console.log(`Adding task`);
+function submitTask() {
+    let newTask = {
+        task: $('#inputTask').val(),
+        isComplete: false
+    };
 
+    console.log(`Adding task`, newTask);
 
-// }
+    $.ajax({
+        method: "POST",
+        url: "/tasks",
+        data: newTask
+    })
+    .then(function (response) { 
+        $('#inputTask').val('');
+    })
+    .catch(function (err) {
+        console.log(`Error posting:`, err);
+    })
+
+}
