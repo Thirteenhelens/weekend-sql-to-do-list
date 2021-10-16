@@ -20,6 +20,7 @@ pool.on(`error`, (error) => {
 });
 
 
+//GET
 router.get(`/`, (req, res) => {
     console.log(`Continuing to get tasks`);
 
@@ -37,5 +38,20 @@ router.get(`/`, (req, res) => {
             res.sendStatus(501);
         });
 })
+
+
+//PUT
+router.put("/:id", (req, res) => {
+    console.log(``);
+}
+
+
+//POST
+
+
+
+//DELETE
+
+
 
 module.exports = router;
