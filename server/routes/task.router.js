@@ -22,17 +22,14 @@ pool.on('error', (error) => {
 
 //GET
 router.get('/', (req, res) => {
-    console.log('Continuing to get tasks');
+    console.log('Getting tasks');
 
     let queryText = `
     SELECT * FROM "tasks"
     ORDER BY "id";`;
 
-    console.log(res);
-
     pool.query(queryText)
         .then((result) => {
-            console.log(result.rows);
             res.send(result.rows)
         })
         .catch((err) => {
@@ -42,7 +39,32 @@ router.get('/', (req, res) => {
 })
 
 
-//PUT
+//POST
+router.post('/', (req, res) => {
+    const newTask = req.body;
+
+    console.log(req.body);
+
+    let queryText = `
+    INSERT INTO "tasks" ("task", "isComplete")
+    VALUES ($1, false);
+    `;
+
+    console.log('Query ->', queryText);
+
+    pool.query(queryText, [newTask.task])
+        .then((result) => {
+            console.log('Result ->', result);
+            res.sendStatus(202);
+        })
+        .catch((err) => {
+            console.log('Error posting:', err);
+            res.sendStatus(500);
+        })
+});
+
+
+// PUT
 // router.put('/:id', (req, res) => {
 //     console.log(`Completing task`);
 
@@ -51,10 +73,7 @@ router.get('/', (req, res) => {
 //     SET "transfer_ready" = TRUE
 //     WHERE "id" = $1
 //     `;
-// }
-
-
-//POST
+// });
 
 
 

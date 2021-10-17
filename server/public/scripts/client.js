@@ -12,9 +12,9 @@ $(document).ready(function () {
 
 
 function clickListeners() {
-    // $('#submitButton').on(`click`, submitTask);
+    $('#submitButton').on(`click`, submitTask);
     // $('.deleteButton').on(`click`, '#tasksDiv', deleteTask);
-    // $('.doneButton').on(`click`, '#tasksDiv', doneTask);
+    // $('#tasksDiv').on(`click`, '.doneButton', doneTask);
 }
 
 
@@ -26,7 +26,7 @@ function getTasks() {
         url: "/tasks"
     })
         .then(function (response) {
-            console.log(`Tasks are:`, response);
+            console.log(`Tasks are:`, response); //REMOVE BEFORE FIN
             renderTasks(response);
         })
         .catch(function (err) {
@@ -59,46 +59,47 @@ function renderTasks(tasks) {
 }
 
 
-// function submitTask() {
-//     console.log(`Adding task`);
+function submitTask() {
+    console.log(`Adding task`);
 
-//     let newTask = {
-//         task: $('#inputTask').val(),
-//         isComplete: false
-//     };
+    let newTask = {
+        task: $('#inputTask').val(),
+    }
 
-//     console.log(newTask);
+    console.log('New task is:', newTask);
 
-//     $.ajax({
-//         method: "POST",
-//         url: "/tasks",
-//         data: newTask
-//     })
-//         .then(function (response) {
-//             $('#inputTask').val('');
-//             getTasks();
-//         })
-//         .catch(function (err) {
-//             console.log(`Error posting:`, err);
-//         })
+    $.ajax({
+        method: "POST",
+        url: "/tasks",
+        data: newTask
+    })
+        .then(function (response) {
+            $('#inputTask').val('');
+            getTasks();
+        })
+        .catch(function (err) {
+            console.log(`Error posting:`, err);
+        })
 
-// }
+}
 
 
 // function doneTask() {
-//     console.log(`Task is done`);
+//     console.log(`Marked task as done`);
 
 //     let finishedTaskId = $(this).closest('tr').data('id');
 
 //     $.ajax({
 //         method: "PUT",
-//         url: `tasks/${finishedTaskId}`
+//         url: `/tasks/${finishedTaskId}`,
+//         data: true
 //     })
 //         .then(function (response) {
+//             console.log(response);
 //             getTasks();
 //         })
 //         .catch(function (err) {
-//             console.log(`Error marking tasks done`, err);
+//             console.log(`Error marking task done`, err);
 //         })
 // }
 
