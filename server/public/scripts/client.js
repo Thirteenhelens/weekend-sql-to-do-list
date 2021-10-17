@@ -48,7 +48,7 @@ function renderTasks(tasks) {
             let completeBtn = `<button class="btn btn-outline-secondary doneButton">Finished</button>`;
 
             let task = $(`
-            <tr data-id="${id}">
+            <tr class="taskRow" data-id="${id}">
                 <td>${tasks[i].task}</td>
                 <td>${completeBtn}</td>
                 <td><button class="deleteButton btn btn-outline-danger">Remove</button></td>
@@ -73,6 +73,10 @@ function renderTasks(tasks) {
 
 function submitTask() {
     console.log(`Adding task`);
+
+    if ($('#inputTask').val() === '') {
+        alert(`Empty task felid, please add task`)
+    }
 
     let newTask = {
         task: $('#inputTask').val(),
