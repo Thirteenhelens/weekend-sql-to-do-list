@@ -13,7 +13,7 @@ $(document).ready(function () {
 
 function clickListeners() {
     $('#submitButton').on(`click`, submitTask);
-    // $('.deleteButton').on(`click`, '#tasksDiv', deleteTask);
+    $('#tasksDiv').on(`click`, '.deleteButton', deleteTask);
     $('#tasksDiv').on(`click`, '.doneButton', doneTask);
 }
 
@@ -103,22 +103,22 @@ function doneTask() {
 }
 
 
-// function deleteTask() {
-//     console.log(`Deleting task`);
+function deleteTask() {
+    console.log(`Deleting task`);
 
-//     let taskToDelete = $(this).closest('tr').data('id');
+    let taskToDelete = $(this).closest('tr').data('id');
 
-//     console.log(taskToDelete);
+    console.log(taskToDelete);
 
-//     $.ajax({
-//         method: "DELETE",
-//         url: `/tasks/${taskToDelete}`,
-//     })
-//         .then(function (response) {
-//             console.log();
-//             getTasks();
-//         })
-//         .catch(function (err) {
-//             console.log(`Error deleting`, err);
-//         })
-// }
+    $.ajax({
+        method: "DELETE",
+        url: `/tasks/${taskToDelete}`,
+    })
+        .then(function (response) {
+            console.log(response);
+            getTasks();
+        })
+        .catch(function (err) {
+            console.log(`Error deleting`, err);
+        })
+}
