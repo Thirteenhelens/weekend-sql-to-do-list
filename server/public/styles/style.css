@@ -1,18 +1,18 @@
 body {
   background-color: #fafffdaf;
 }
-
-h1 {
-  font-family: monospace;
-}
-
 #pageTitle {
   border: lightpink;
-  
+
   margin-bottom: 15px;
   padding: 20px;
   background-color: #0ecaf0;
   text-align: center;
+}
+
+h1 {
+  font-weight: bolder;
+  font-family: monospace;
 }
 
 #taskInput {
@@ -20,7 +20,20 @@ h1 {
 }
 
 td {
+  font-weight: lighter;
   font-family: monospace;
+}
+
+.deleteButton {
+  color: black;
+}
+
+.completedTask {
+  background-color: darkseagreen;
+}
+
+.doneButton {
+    color: black;
 }
 
 button {
@@ -28,27 +41,12 @@ button {
 }
 
 .testing {
-    text-align: center;
-    background-color: lightpink;
-
+  text-align: center;
+  background-color: lightpink;
 }
 
 #testBox {
-    display: flex;
-    justify-items: flex-start;
-    margin: 20px;
-}
-
-
-
-.deleteButton {
-    color: black;
-}
-
-.completed {
-    background-color: lightpink;
-}
-
-.doneButton {
-    color: lightpink;
+  display: flex;
+  justify-items: flex-start;
+  margin: 20px;
 }

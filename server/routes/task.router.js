@@ -35,7 +35,7 @@ router.get('/', (req, res) => {
         })
         .catch((err) => {
             console.log(`Error getting tasks:`, err);
-            res.sendStatus(501);
+            res.sendStatus(500);
         });
 })
 
@@ -56,7 +56,7 @@ router.post('/', (req, res) => {
     pool.query(queryText, [newTask.task])
         .then((result) => {
             console.log(`Result ->`, result);
-            res.sendStatus(202);
+            res.sendStatus(201);
         })
         .catch((err) => {
             console.log(`Error posting:`, err);
@@ -82,11 +82,11 @@ router.put('/:id', (req, res) => {
 
     pool.query(queryText, value)
         .then(result => {
-            res.sendStatus(204);
+            res.sendStatus(201);
         })
         .catch(err => {
             console.log(`Error completing task`, err);
-
+            res.sendStatus(500);
         })
 });
 
@@ -107,7 +107,7 @@ router.delete('/:id', (req, res) => {
 
     pool.query(queryText, value)
         .then(result => {
-            res.sendStatus(204);
+            res.sendStatus(202);
         })
         .catch(result => {
             console.log(`Error deleting`, err);

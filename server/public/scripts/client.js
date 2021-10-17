@@ -42,18 +42,31 @@ function renderTasks(tasks) {
     //Looping through all tasks, formatting, then appending to DOM
     for (let i = 0; i < tasks.length; i++) {
         let id = tasks[i].id;
-        let completeBtn = ``;
 
+        //If task is not completed, give it complete button
         if (!tasks[i].isComplete) {
-            completeBtn = `<button class="btn btn-outline-secondary doneButton">Finished</button>`;
+            let completeBtn = `<button class="btn btn-outline-secondary doneButton">Finished</button>`;
+
+            let task = $(`
+            <tr data-id="${id}">
+                <td>${tasks[i].task}</td>
+                <td>${completeBtn}</td>
+                <td><button class="deleteButton btn btn-outline-danger">Remove</button></td>
+            </tr> `);
+
+            $('#tasksDiv').append(task);
         }
-        let task = $(`
-        <tr data-id="${id}">
-            <td>${tasks[i].task}</td>
-            <td>${completeBtn}</td>
-            <td><button class="deleteButton btn btn-outline-danger">Remove</button></td>
-        </tr> `);
-        $('#tasksDiv').append(task);
+        //If task is completed, change background color
+        else if (tasks[i].isComplete) {
+            let task = $(`
+            <tr data-id="${id}">
+                <td class="completedTask">${tasks[i].task}</td>
+                <td></td>
+                <td><button class="deleteButton btn btn-outline-danger">Remove</button></td>
+            </tr> `);
+
+            $('#tasksDiv').append(task);
+        }
     }
 }
 
@@ -90,6 +103,7 @@ function doneTask() {
 
     //Getting id for task to be completed
     let finishedTaskId = $(this).closest('tr').data('id');
+
 
     //Getting router to update a specific task
     $.ajax({
