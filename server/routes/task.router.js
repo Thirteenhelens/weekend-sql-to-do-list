@@ -1,5 +1,5 @@
 //Setting up express
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
 //Setting up postgres
@@ -14,16 +14,16 @@ const pool = new Pool({
 });
 
 pool.on('connect', () => {
-    console.log("postgreSQL connected");
+    console.log(`postgreSQL connected`);
 });
 pool.on('error', (error) => {
-    console.log("ERROR connecting to postgreSQL", error);
+    console.log(`ERROR connecting to postgreSQL`, error);
 });
 
 
 //GET
 router.get('/', (req, res) => {
-    console.log('Getting tasks');
+    console.log(`Getting tasks`);
 
     let queryText = `
     SELECT * FROM "tasks"
@@ -34,7 +34,7 @@ router.get('/', (req, res) => {
             res.send(result.rows)
         })
         .catch((err) => {
-            console.log('Error getting tasks:', err);
+            console.log(`Error getting tasks:`, err);
             res.sendStatus(501);
         });
 })
@@ -51,15 +51,15 @@ router.post('/', (req, res) => {
     VALUES ($1, false);
     `;
 
-    console.log('Query ->', queryText);
+    console.log(`Query ->`, queryText);
 
     pool.query(queryText, [newTask.task])
         .then((result) => {
-            console.log('Result ->', result);
+            console.log(`Result ->`, result);
             res.sendStatus(202);
         })
         .catch((err) => {
-            console.log('Error posting:', err);
+            console.log(`Error posting:`, err);
             res.sendStatus(500);
         })
 });
@@ -81,15 +81,14 @@ router.put('/:id', (req, res) => {
     console.log(`Query ->`, queryText);
 
     pool.query(queryText, value)
-    .then(result => {
-        res.sendStatus(204);
-    })
-    .catch(err => {
-        console.log(`Error completing task`, err);
+        .then(result => {
+            res.sendStatus(204);
+        })
+        .catch(err => {
+            console.log(`Error completing task`, err);
 
-    })
+        })
 });
-
 
 
 //DELETE
@@ -107,13 +106,13 @@ router.delete('/:id', (req, res) => {
     `;
 
     pool.query(queryText, value)
-    .then(result => {
-        res.sendStatus(204);
-    })
-    .catch(result => {
-        console.log(`Error deleting`, err);
-        res.sendStatus(500);
-    })
+        .then(result => {
+            res.sendStatus(204);
+        })
+        .catch(result => {
+            console.log(`Error deleting`, err);
+            res.sendStatus(500);
+        })
 });
 
 

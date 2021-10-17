@@ -1,10 +1,10 @@
 //Express 
-const express = require("express");
+const express = require('express');
 const app = express();
 app.use(express.static('server/public'));
 
 //Body Parser
-const bodyParser = require("body-parser");
+const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -17,5 +17,5 @@ app.use('/tasks', taskRouter);
 // Start listening for requests on a specific port
 const PORT = 5000;
 app.listen(PORT, () => {
-    console.log("listening on port", PORT);
+    console.log('listening on port', PORT);
 });

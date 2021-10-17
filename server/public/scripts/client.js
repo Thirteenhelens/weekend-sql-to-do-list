@@ -66,7 +66,7 @@ function submitTask() {
     }
 
     //Logging for redundancy 
-    console.log('New task is:', newTask);
+    console.log(`New task is:`, newTask);
 
     //Giving router a new task to put on DOM
     $.ajax({
