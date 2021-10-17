@@ -65,15 +65,29 @@ router.post('/', (req, res) => {
 
 
 // PUT
-// router.put('/:id', (req, res) => {
-//     console.log(`Completing task`);
+router.put('/:id', (req, res) => {
+    console.log(`Completing task`);
 
-//     let queryText = `
-//     UPDATE "koalas"
-//     SET "transfer_ready" = TRUE
-//     WHERE "id" = $1
-//     `;
-// });
+    let id = req.params.id;
+    let value = [id];
+
+    let queryText = `
+    UPDATE "tasks"
+    SET "isComplete" = TRUE
+    WHERE "id" = $1;
+    `;
+
+    console.log(`Query ->`, queryText);
+
+    pool.query(queryText, value)
+    .then(result => {
+        res.sendStatus(204);
+    })
+    .catch(err => {
+        console.log(`Error completing task`, err);
+
+    })
+});
 
 
 

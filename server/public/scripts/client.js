@@ -14,7 +14,7 @@ $(document).ready(function () {
 function clickListeners() {
     $('#submitButton').on(`click`, submitTask);
     // $('.deleteButton').on(`click`, '#tasksDiv', deleteTask);
-    // $('#tasksDiv').on(`click`, '.doneButton', doneTask);
+    $('#tasksDiv').on(`click`, '.doneButton', doneTask);
 }
 
 
@@ -84,24 +84,23 @@ function submitTask() {
 }
 
 
-// function doneTask() {
-//     console.log(`Marked task as done`);
+function doneTask() {
+    console.log(`Marked task as done`);
 
-//     let finishedTaskId = $(this).closest('tr').data('id');
+    let finishedTaskId = $(this).closest('tr').data('id');
 
-//     $.ajax({
-//         method: "PUT",
-//         url: `/tasks/${finishedTaskId}`,
-//         data: true
-//     })
-//         .then(function (response) {
-//             console.log(response);
-//             getTasks();
-//         })
-//         .catch(function (err) {
-//             console.log(`Error marking task done`, err);
-//         })
-// }
+    $.ajax({
+        method: "PUT",
+        url: `/tasks/${finishedTaskId}`,
+    })
+        .then(function (response) {
+            console.log(response);
+            getTasks();
+        })
+        .catch(function (err) {
+            console.log(`Error marking task done`, err);
+        })
+}
 
 
 // function deleteTask() {
