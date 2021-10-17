@@ -3,7 +3,6 @@ console.log(`HTML loaded`);
 $(document).ready(function () {
     console.log(`jQ loaded`);
 
-    //Call click listener func.
     clickListeners();
 
     //Getting all tasks
@@ -21,12 +20,12 @@ function clickListeners() {
 function getTasks() {
     console.log(`Getting tasks`);
 
+    //Asking router to give all tasks
     $.ajax({
         method: "GET",
         url: "/tasks"
     })
         .then(function (response) {
-            console.log(`Tasks are:`, response); //REMOVE BEFORE FIN
             renderTasks(response);
         })
         .catch(function (err) {
@@ -40,19 +39,19 @@ function renderTasks(tasks) {
 
     $('#tasksDiv').empty();
 
+    //Looping through all tasks, formatting, then appending to DOM
     for (let i = 0; i < tasks.length; i++) {
         let id = tasks[i].id;
-
         let completeBtn = ``;
 
         if (!tasks[i].isComplete) {
-            completeBtn = `<button class="doneButton">Finished</button>`;
+            completeBtn = `<button class="btn btn-outline-secondary doneButton">Finished</button>`;
         }
         let task = $(`
         <tr data-id="${id}">
             <td>${tasks[i].task}</td>
             <td>${completeBtn}</td>
-            <td><button class="deleteButton">Remove</button></td>
+            <td><button class="deleteButton btn btn-outline-danger">Remove</button></td>
         </tr> `);
         $('#tasksDiv').append(task);
     }
@@ -66,8 +65,10 @@ function submitTask() {
         task: $('#inputTask').val(),
     }
 
+    //Logging for redundancy 
     console.log('New task is:', newTask);
 
+    //Giving router a new task to put on DOM
     $.ajax({
         method: "POST",
         url: "/tasks",
@@ -87,8 +88,10 @@ function submitTask() {
 function doneTask() {
     console.log(`Marked task as done`);
 
+    //Getting id for task to be completed
     let finishedTaskId = $(this).closest('tr').data('id');
 
+    //Getting router to update a specific task
     $.ajax({
         method: "PUT",
         url: `/tasks/${finishedTaskId}`,
@@ -106,10 +109,10 @@ function doneTask() {
 function deleteTask() {
     console.log(`Deleting task`);
 
+    //Getting id for task to be removed
     let taskToDelete = $(this).closest('tr').data('id');
 
-    console.log(taskToDelete);
-
+    //Asking router to delete a specific task
     $.ajax({
         method: "DELETE",
         url: `/tasks/${taskToDelete}`,

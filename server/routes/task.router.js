@@ -1,9 +1,10 @@
+//Setting up express
 const express = require("express");
 const router = express.Router();
+
+//Setting up postgres
 const pg = require('pg');
-
 const Pool = pg.Pool;
-
 const pool = new Pool({
     database: 'weekend-to-do-app',
     host: 'localhost',
@@ -94,9 +95,8 @@ router.put('/:id', (req, res) => {
 //DELETE
 router.delete('/:id', (req, res) => {
     console.log(`Deleting Task`);
-    
+
     let id = req.params.id;
-    
     console.log(id);
 
     let value = [id];

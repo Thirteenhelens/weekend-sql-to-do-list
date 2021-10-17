@@ -1,0 +1,54 @@
+body {
+  background-color: #fafffdaf;
+}
+
+h1 {
+  font-family: monospace;
+}
+
+#pageTitle {
+  border: lightpink;
+  
+  margin-bottom: 15px;
+  padding: 20px;
+  background-color: #0ecaf0;
+  text-align: center;
+}
+
+#taskInput {
+  text-align: center;
+}
+
+td {
+  font-family: monospace;
+}
+
+button {
+  font-family: "Times New Roman", Times, serif;
+}
+
+.testing {
+    text-align: center;
+    background-color: lightpink;
+
+}
+
+#testBox {
+    display: flex;
+    justify-items: flex-start;
+    margin: 20px;
+}
+
+
+
+.deleteButton {
+    color: black;
+}
+
+.completed {
+    background-color: lightpink;
+}
+
+.doneButton {
+    color: lightpink;
+}
